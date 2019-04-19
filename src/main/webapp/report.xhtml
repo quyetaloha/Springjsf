@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Sửa nhân viên</title>
+	<!-- <a href="/FtuTask/">Danh sách nhân viên</a> -->
+	<p:commandLink action="index?faces-redirect=true"
+		value="Danh sách nhân viên" />
+	<br />
+	<style>
+</style>
+</h:head>
+<h:body>
+	<script type="text/javascript">
+		//<![CDATA[
+		function start() {
+			PF('statusDialog').show();
+		}
+
+		function stop() {
+			PF('statusDialog').hide();
+		}
+		//]]>
+	</script>
+
+
+	<p:dialog modal="true" widgetVar="statusDialog"
+		header="Đang xử lý tạo file ..." draggable="false" closable="false"
+		resizable="false">
+		<p:graphicImage url="/ajaxloadingbar.gif.xhtml.gif" />
+	</p:dialog>
+
+	<h1>Lọc nhân viên theo ngày tuyển</h1>
+	<h:form>
+		Từ ngày
+		<!-- <h:inputText value="#{locNgay.date1}"
+			converterMessage="Format must be: dd-MM-yy">
+			<f:convertDateTime pattern="dd-MM-yy" />
+		</h:inputText>
+		 -->
+		<p:calendar id="inline" value="#{locNgay.date1}" inline="true"
+			pattern="dd/MMMM/yyyy">
+		</p:calendar>
+		
+		Đến ngày
+		<!-- <h:inputText value="#{locNgay.date2}"
+			converterMessage="Format must be: dd-MM-yy">
+			<f:convertDateTime pattern="dd-MM-yy" />
+		</h:inputText>
+		<h:commandButton value="Lọc" action="filter.xhtml?faces-redirect=true" />
+		 -->
+		<p:calendar id="inline2" value="#{locNgay.date2}" inline="true"
+			pattern="dd/MMMM/yyyy" />
+		<p:commandButton value="Lọc" action="filter.xhtml?faces-redirect=true" />
+	</h:form>
+
+
+
+</h:body>
+
+</html>

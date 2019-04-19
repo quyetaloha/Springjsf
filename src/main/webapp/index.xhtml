@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Spring + JSF</title>
+	<style>
+		.ui-stack {
+			z-index: 1000;
+		}
+	</style>
+</h:head>
+<h:body>
+	
+	<script type="text/javascript">
+		//<![CDATA[
+		function start() {
+			PF('statusDialog').show();
+		}
+
+		function stop() {
+			PF('statusDialog').hide();
+		}
+		//]]>
+	</script>
+
+
+	<p:dialog modal="true" widgetVar="statusDialog"
+		header="Đang xử lý tạo file ..." draggable="false" closable="false"
+		resizable="false">
+		<p:graphicImage url="/resources/img/ajaxloadingbar.gif.xhtml.gif" />
+	</p:dialog>
+	
+	<h:outputText value="#{request.getParameter('id')}" />
+	<center><h1>Danh sách nhân viên</h1></center>
+	
+	<p:commandLink action="addEmp?faces-redirect=true" value="Thêm nhân viên"/><br/>
+	<p:commandLink action="report?faces-redirect=true" value="Lọc"/>
+	<p:commandLink action="importNumberFile?faces-redirect=true" value="Upload file"/><br/>
+	
+	
+	<h:form>
+		<p:commandButton style="margin:5px 0px" value="Xuất file excel" ajax="false"
+			onclick="PrimeFaces.monitorDownload(start, stop);"
+			icon="pi pi-arrow-down">
+			<p:fileDownload
+				value="#{fileDownloadView.dowload(empHome.findAll())}" />
+		</p:commandButton>
+	</h:form>
+	
+	
+		
+	
+
+	<h:form>
+		<center>
+		<p:commandButton id="submit-button" style="margin-bottom:5px" value="Lưu thay đổi"
+			action="#{controller.saveAction(empHome.findAll())}" rendered="#{emp.isEdit()}"  />
+			</center>
+		<p:dataTable value="#{empHome.findAll()}" var="emp" id="table">
+
+			<p:column>
+				<f:facet name="header">Empno</f:facet>    				
+               #{emp.empno}
+            </p:column>
+
+			<p:column>
+				<f:facet name="header">Ename</f:facet>
+				<h:inputText value="#{emp.ename}" size="10"
+					rendered="#{emp.editable}" />
+				<h:outputText value="#{emp.ename}" size="10"
+					rendered="#{not emp.editable}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Job</f:facet>
+				<h:inputText value="#{emp.job}" size="10" rendered="#{emp.editable}" />
+				<h:outputText value="#{emp.job}" size="10"
+					rendered="#{not emp.editable}" />
+
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Mgr</f:facet>
+				<h:inputText value="#{emp.mgr}" size="10" rendered="#{emp.editable}" />
+				<h:outputText value="#{emp.mgr}" size="10"
+					rendered="#{not emp.editable}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">HireDate</f:facet>
+				<h:inputText value="#{emp.hiredate}" size="10"
+					rendered="#{emp.editable}">
+					<f:convertDateTime pattern="dd-mm-yyyy" />
+				</h:inputText>
+				<h:outputText value="#{emp.hiredate}" size="10"
+					rendered="#{not emp.editable}">
+					<f:convertDateTime type="date" pattern="dd-MMM-yyyy" />
+				</h:outputText>
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Salary</f:facet>
+				<h:inputText value="#{emp.sal}" size="10" rendered="#{emp.editable}" />
+				<h:outputText value="#{emp.sal}" size="10"
+					rendered="#{not emp.editable}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Comm</f:facet>
+				<h:inputText value="#{emp.comm}" size="10"
+					rendered="#{emp.editable}" />
+				<h:outputText value="#{emp.comm}" size="10"
+					rendered="#{not emp.editable}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Deptno</f:facet>
+				<h:inputText binding="#{input1}" size="10" value="#{emp.dept.deptno}"
+					rendered="#{emp.editable}" >
+					
+					 <f:ajax listener="#{emp.setDept(deptHome.findById(input1.value))}" />
+					
+					</h:inputText>
+				<h:outputText value="#{emp.dept.deptno}" size="10"
+					rendered="#{not emp.editable}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Action</f:facet>
+
+				<p:commandLink value="Edit" action="#{controller.editAction(emp)}"
+					rendered="#{not emp.editable}" />
+				
+				
+				<p:commandButton id="submit-button" value="Xóa"
+					action="#{empHome.remove(emp)}" />
+			</p:column>
+		</p:dataTable>
+		
+	</h:form>
+</h:body>
+</html>

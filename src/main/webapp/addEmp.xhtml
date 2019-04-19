@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Thêm nhân viên</title>
+	<a href="/FtuTask/">Danh sách nhân viên</a>
+	<style>
+</style>
+</h:head>
+<h:body>
+	<h:form id="user-form">
+		<table>
+			<tr>
+				<td><p:outputLabel styleClass="nhan" for="empno">Empno</p:outputLabel>
+				</td>
+				<td><p:inputText id="empno" value="#{emp.empno}"
+						required="true" requiredMessage="empno is required"  /></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel styleClass="nhan" for="ename">Ename</p:outputLabel></td>
+				<td><p:inputText id="ename" value="#{emp.ename}"
+						required="true" requiredMessage="Ename is required" /></td>
+			</tr>
+
+			<tr>
+				<td><p:outputLabel for="job" styleClass="nhan">Job</p:outputLabel>
+
+				</td>
+				<td><p:inputText id="job" value="#{emp.job}" required="false"
+						requiredMessage="Username is required" /></td>
+
+			</tr>
+
+			<tr>
+				<td><p:outputLabel styleClass="nhan" for="mgr">Mgr</p:outputLabel>
+
+				</td>
+				<td><p:inputText id="mgr" value="#{emp.mgr}" required="false"
+						requiredMessage="Username is required" /></td>
+
+			</tr>
+
+			<tr>
+				<td><p:outputLabel styleClass="nhan" for="hireDate">HireDate</p:outputLabel>
+
+				</td>
+				<td><p:calendar id="hireDate" value="#{emp.hiredate}"
+						inline="true" pattern="dd/MMM/yyyy">
+					</p:calendar></td>
+
+			</tr>
+
+			<tr>
+				<td><p:outputLabel styleClass="nhan" for="sal">Sal</p:outputLabel>
+
+				</td>
+				<td><p:inputText id="sal" value="#{emp.sal}" required="false"
+						requiredMessage="Username is required" /></td>
+
+			</tr>
+
+			<tr>
+				<td><p:outputLabel styleClass="nhan" for="comm">Comm</p:outputLabel>
+
+				</td>
+				<td><p:inputText id="comm" value="#{emp.comm}" required="false"
+						requiredMessage="Username is required" /></td>
+			</tr>
+
+			<tr>
+				<td><p:outputLabel for="deptno">Deptno</p:outputLabel></td>
+				<td><p:inputText id="deptno" binding="#{input1}"
+						required="false" requiredMessage="Username is required">
+					</p:inputText></td>
+			</tr>
+		</table>
+
+
+
+		<p:commandButton id="submit-button" value="Submit"
+			action="#{empHome.persist(emp)}">
+			<f:actionListener
+				binding="#{emp.setDept(deptHome.findById(input1.value))}" />
+		</p:commandButton>
+	</h:form>
+</h:body>
+
+</html>
