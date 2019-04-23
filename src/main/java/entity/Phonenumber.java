@@ -36,7 +36,7 @@ public class Phonenumber implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "phone_seq")
-	@SequenceGenerator(name = "phone_seq", sequenceName = "phone_seq", allocationSize = 1, initialValue = 1)
+	@SequenceGenerator(name = "phone_seq", sequenceName = "phone_seq", allocationSize = 1)
 	@Column(name = "ID", unique = true, nullable = false, precision = 10, scale = 0)
 	public long getId() {
 		return this.id;

@@ -6,17 +6,26 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
+<h:body>
+
+
+
 
 	<h:form enctype="multipart/form-data">
-		<p:growl id="messages" showDetail="true" />
-	
-		<p:fileUpload value="#{phoneNumberFileUploade.file}" mode="simple"
-			skinSimple="true" />
-	
-		<br />
-		<br />
-		<h:messages globalOnly="true" />
-		<p:commandButton value="Submit" ajax="false"
-			action="#{phoneNumberFileUploade.upload2}"  />
+		<p:panel id="pnl">
+			<p:growl id="messages" showDetail="true" />
+			<p:fileUpload value="#{phoneNumberFileUploade.file}" mode="simple"
+				skinSimple="true" />
+
+			<br />
+			<br />
+			<p:commandButton id="save" value="Submit" ajax="false"
+				action="#{phoneNumberFileUploade.insertNumbers}" />
+		</p:panel>
+
 	</h:form>
+
+
+
+</h:body>
 </html>

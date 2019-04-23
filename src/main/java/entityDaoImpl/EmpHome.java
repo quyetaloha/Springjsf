@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,9 +33,13 @@ public class EmpHome implements EmpDAO{
 
 	private static final Log log = LogFactory.getLog(EmpHome.class);
 
-	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
-	EntityManager entityManager = entityManagerFactory.createEntityManager();
-
+	
+	  EntityManagerFactory entityManagerFactory =
+	  Persistence.createEntityManagerFactory("persistence"); EntityManager
+	  entityManager = entityManagerFactory.createEntityManager();
+	 
+	
+	
 	public String persist(Emp transientInstance) {
 		entityManager.getTransaction().begin();
 		

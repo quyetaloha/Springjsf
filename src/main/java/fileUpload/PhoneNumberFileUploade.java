@@ -27,8 +27,9 @@ import entityDaoImpl.PhonenumberHome;
 @ManagedBean(name = "phoneNumberFileUploade")
 public class PhoneNumberFileUploade {
 	private UploadedFile file;
-	
-	PhonenumberHome phonenumberHome=new PhonenumberHome();
+
+	PhonenumberHome phonenumberHome = new PhonenumberHome();
+
 	public UploadedFile getFile() {
 		return file;
 	}
@@ -45,53 +46,47 @@ public class PhoneNumberFileUploade {
 		}
 	}
 
-	public void handleFileUpload(FileUploadEvent event) {
-		FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
+	/*
+	 * public String insertNumbers() { try (InputStream input =
+	 * file.getInputstream()) {
+	 * 
+	 * FileInputStream fileInputStream = (FileInputStream) file.getInputstream();
+	 * Scanner sc = new Scanner(fileInputStream); ArrayList<String> phones = new
+	 * ArrayList<String>(); while (sc.hasNext()) { String word = sc.next();
+	 * 
+	 * phones.add(word); } phonenumberHome.them(phones);
+	 * 
+	 * } catch (IOException e) { e.printStackTrace(); }
+	 * 
+	 * return null;
+	 * 
+	 * File hi=new File(
+	 * "G:\\eclipse-workspace\\FtuTask\\src\\main\\webapp\\resources\\FileUpload",
+	 * fileName); System.out.println(hi.getAbsolutePath()); Files.copy(input,
+	 * hi.toPath()); System.out.println(hi.getAbsolutePath());
+	 * 
+	 * 
+	 * 
+	 * try (BufferedReader br = new BufferedReader(new FileReader(
+	 * "G:\\eclipse-workspace\\FtuTask\\src\\main\\webapp\\resources\\FileUpload\\"+
+	 * fileName))) { String sCurrentLine;
+	 * 
+	 * while ((sCurrentLine = br.readLine()) != null) {
+	 * System.out.println(sCurrentLine); }
+	 * 
+	 * 
+	 * 
+	 * FileInputStream fileInputStream=(FileInputStream) file.getInputstream(); int
+	 * content; while ((content = fileInputStream.read()) != -1) { // convert to
+	 * char and display it System.out.print((char) content); }
+	 * 
+	 * }
+	 */
 
-	public String upload2() {
-		try (InputStream input = file.getInputstream()) {
-			String fileName = file.getFileName();
-			
-			  
-			  
-			/*
-			 * File hi=new File(
-			 * "G:\\eclipse-workspace\\FtuTask\\src\\main\\webapp\\resources\\FileUpload",
-			 * fileName); System.out.println(hi.getAbsolutePath()); Files.copy(input,
-			 * hi.toPath()); System.out.println(hi.getAbsolutePath());
-			 */
-			  
-			/*
-			 * try (BufferedReader br = new BufferedReader(new FileReader(
-			 * "G:\\eclipse-workspace\\FtuTask\\src\\main\\webapp\\resources\\FileUpload\\"+
-			 * fileName))) { String sCurrentLine;
-			 * 
-			 * while ((sCurrentLine = br.readLine()) != null) {
-			 * System.out.println(sCurrentLine); }
-			 */
-			  
-			/*
-			 * FileInputStream fileInputStream=(FileInputStream) file.getInputstream(); int
-			 * content; while ((content = fileInputStream.read()) != -1) { // convert to
-			 * char and display it System.out.print((char) content); }
-			 */
-			FileInputStream fileInputStream=(FileInputStream) file.getInputstream();
-			  Scanner sc = new Scanner(fileInputStream);
-			  ArrayList<String> phones=new ArrayList<String>();
-			  while(sc.hasNext()){
-				    String word = sc.next();
-				    System.out.println(word);
-				    phones.add(word);
-				}
-			  phonenumberHome.them(phones);
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-		
+	public String insertNumbers() {
+		phonenumberHome.them(file);
+		FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 		return null;
 	}
 }
