@@ -45,14 +45,13 @@ public class PhonenumberHome {
 
 	private static final Log log = LogFactory.getLog(PhonenumberHome.class);
 
-	/*
-	 * EntityManagerFactory entityManagerFactory =
-	 * Persistence.createEntityManagerFactory("persistence"); EntityManager
-	 * entityManager = entityManagerFactory.createEntityManager();
-	 */
 	
-	@PersistenceContext
-	EntityManager entityManager;
+	  EntityManagerFactory entityManagerFactory =
+	  Persistence.createEntityManagerFactory("persistence"); EntityManager
+	  entityManager = entityManagerFactory.createEntityManager();
+	 
+	
+	
 	/*
 	 * public void them( final ArrayList<String> phones) { long start=new
 	 * Date().getTime(); log.debug("persisting Phonenumber instance");
@@ -114,13 +113,10 @@ public class PhonenumberHome {
 					InputStream fileInputStream;
 					try {
 						fileInputStream = file.getInputstream();
-						Scanner sc = new Scanner(fileInputStream);
 						BufferedReader br = new BufferedReader(new InputStreamReader(fileInputStream));
 						String phone;
 						while ((phone = br.readLine()) != null) {
-
 							preparedStatement.setString(1, phone);
-							preparedStatement.addBatch();
 							count++;
 							System.out.println("count:" + count);
 							if (count % 1000 == 0) {
